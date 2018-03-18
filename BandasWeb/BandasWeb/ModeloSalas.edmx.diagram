@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5d13bef9615c477baa5f09fe5111aca8" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.Carac_sala" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Caracteristicas" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Detalle_sala" Width="1.5" PointX="9.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Horario" Width="1.5" PointX="10.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Horario_sala" Width="1.5" PointX="12.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Reserva" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Rolex" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Sala" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Usuario_dueno" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Usuarios" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="Database1Model.FK__Carac_sal__Id_Ca__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Carac_sal__Id_Sa__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Detalle_s__Id_Sa__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Horario_s__Id_ho__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Horario_s__Id_sa__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Reserva__Id_hora__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Reserva__Id_usua__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Usuarios__Tipo_u__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Sala__Id_dueno__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK__Usuario_d__Id_Us__5DCAEF64" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
