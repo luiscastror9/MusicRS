@@ -53,6 +53,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -168,17 +170,62 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Caracteristicas.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carac_sala.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Detalle_sala.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Horario.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Horario_sala.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelSalas.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSalas.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelSalas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelSalas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSalas.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reserva.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rolex.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sala.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Usuarios.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario_dueno.cs">
+      <DependentUpon>ModelSalas.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />
@@ -193,9 +240,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ModelSalas.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelSalas.edmx</DependentUpon>
+      <LastGenOutput>ModelSalas.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelSalas.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelSalas.edmx</DependentUpon>
+      <LastGenOutput>ModelSalas.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\app\bootstrap-carousel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="ModelSalas.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelSalas.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ModelSalas.edmx.diagram">
+      <DependentUpon>ModelSalas.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -244,7 +308,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Musicos.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
