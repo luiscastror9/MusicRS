@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Carac_sala">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Sala" Type="Int32" Nullable="false" />
+    <Property Name="Id_Caracteristicas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Caracteristicas" Relationship="Self.FK__Carac_sal__Id_Ca__619B8048" FromRole="Carac_sala" ToRole="Caracteristicas" />
+    <NavigationProperty Name="Sala" Relationship="Self.FK__Carac_sal__Id_Sa__60A75C0F" FromRole="Carac_sala" ToRole="Sala" />
+  </EntityType>
+  <EntityType Name="Caracteristicas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Carac_sala" Relationship="Self.FK__Carac_sal__Id_Ca__619B8048" FromRole="Caracteristicas" ToRole="Carac_sala" />
+  </EntityType>
+  <EntityType Name="Detalle_sala">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Sala" Type="Int32" Nullable="false" />
+    <Property Name="Max_musicos" Type="Int32" Nullable="false" />
+    <Property Name="Ancho" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Largo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Sala" Relationship="Self.FK__Detalle_s__Id_Sa__5FB337D6" FromRole="Detalle_sala" ToRole="Sala" />
+  </EntityType>
+  <EntityType Name="Horario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Desde" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Hasta" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Horario_sala" Relationship="Self.FK__Horario_s__Id_ho__628FA481" FromRole="Horario" ToRole="Horario_sala" />
+  </EntityType>
+  <EntityType Name="Horario_sala">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_horario" Type="Int32" Nullable="false" />
+    <Property Name="Id_sala" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Horario" Relationship="Self.FK__Horario_s__Id_ho__628FA481" FromRole="Horario_sala" ToRole="Horario" />
+    <NavigationProperty Name="Sala" Relationship="Self.FK__Horario_s__Id_sa__6383C8BA" FromRole="Horario_sala" ToRole="Sala" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__Id_hora__6477ECF3" FromRole="Horario_sala" ToRole="Reserva" />
+  </EntityType>
+  <EntityType Name="Reserva">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_horario_sala" Type="Int32" Nullable="false" />
+    <Property Name="Id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Horario_sala" Relationship="Self.FK__Reserva__Id_hora__6477ECF3" FromRole="Reserva" ToRole="Horario_sala" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Reserva__Id_usua__656C112C" FromRole="Reserva" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Rolex">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rolex1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__Tipo_u__5CD6CB2B" FromRole="Rolex" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Sala">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_dueno" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Activo" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+    <NavigationProperty Name="Carac_sala" Relationship="Self.FK__Carac_sal__Id_Sa__60A75C0F" FromRole="Sala" ToRole="Carac_sala" />
+    <NavigationProperty Name="Detalle_sala" Relationship="Self.FK__Detalle_s__Id_Sa__5FB337D6" FromRole="Sala" ToRole="Detalle_sala" />
+    <NavigationProperty Name="Horario_sala" Relationship="Self.FK__Horario_s__Id_sa__6383C8BA" FromRole="Sala" ToRole="Horario_sala" />
+    <NavigationProperty Name="Usuario_dueno" Relationship="Self.FK__Sala__Id_dueno__5EBF139D" FromRole="Sala" ToRole="Usuario_dueno" />
+  </EntityType>
+  <EntityType Name="Usuario_dueno">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Usuarios" Type="Int32" Nullable="false" />
+    <Property Name="CUIT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cantidad_salas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Sala" Relationship="Self.FK__Sala__Id_dueno__5EBF139D" FromRole="Usuario_dueno" ToRole="Sala" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuario_d__Id_Us__5DCAEF64" FromRole="Usuario_dueno" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contrasena" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tipo_usuario" Type="Int32" Nullable="false" />
+    <Property Name="Activo" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+    <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__Id_usua__656C112C" FromRole="Usuarios" ToRole="Reserva" />
+    <NavigationProperty Name="Rolex" Relationship="Self.FK__Usuarios__Tipo_u__5CD6CB2B" FromRole="Usuarios" ToRole="Rolex" />
+    <NavigationProperty Name="Usuario_dueno" Relationship="Self.FK__Usuario_d__Id_Us__5DCAEF64" FromRole="Usuarios" ToRole="Usuario_dueno" />
+  </EntityType>
+  <Association Name="FK__Carac_sal__Id_Ca__619B8048">
+    <End Role="Caracteristicas" Type="Self.Caracteristicas" Multiplicity="1" />
+    <End Role="Carac_sala" Type="Self.Carac_sala" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Caracteristicas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Carac_sala">
+        <PropertyRef Name="Id_Caracteristicas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Carac_sal__Id_Sa__60A75C0F">
+    <End Role="Sala" Type="Self.Sala" Multiplicity="1" />
+    <End Role="Carac_sala" Type="Self.Carac_sala" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sala">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Carac_sala">
+        <PropertyRef Name="Id_Sala" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalle_s__Id_Sa__5FB337D6">
+    <End Role="Sala" Type="Self.Sala" Multiplicity="1" />
+    <End Role="Detalle_sala" Type="Self.Detalle_sala" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sala">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Detalle_sala">
+        <PropertyRef Name="Id_Sala" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Horario_s__Id_ho__628FA481">
+    <End Role="Horario" Type="Self.Horario" Multiplicity="1" />
+    <End Role="Horario_sala" Type="Self.Horario_sala" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Horario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Horario_sala">
+        <PropertyRef Name="Id_horario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Horario_s__Id_sa__6383C8BA">
+    <End Role="Sala" Type="Self.Sala" Multiplicity="1" />
+    <End Role="Horario_sala" Type="Self.Horario_sala" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sala">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Horario_sala">
+        <PropertyRef Name="Id_sala" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reserva__Id_hora__6477ECF3">
+    <End Role="Horario_sala" Type="Self.Horario_sala" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Horario_sala">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="Id_horario_sala" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reserva__Id_usua__656C112C">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reserva">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__Tipo_u__5CD6CB2B">
+    <End Role="Rolex" Type="Self.Rolex" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rolex">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="Tipo_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sala__Id_dueno__5EBF139D">
+    <End Role="Usuario_dueno" Type="Self.Usuario_dueno" Multiplicity="1" />
+    <End Role="Sala" Type="Self.Sala" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario_dueno">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sala">
+        <PropertyRef Name="Id_dueno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario_d__Id_Us__5DCAEF64">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Usuario_dueno" Type="Self.Usuario_dueno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario_dueno">
+        <PropertyRef Name="Id_Usuarios" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carac_sala" EntityType="Self.Carac_sala" />
+    <EntitySet Name="Caracteristicas" EntityType="Self.Caracteristicas" />
+    <EntitySet Name="Detalle_sala" EntityType="Self.Detalle_sala" />
+    <EntitySet Name="Horario" EntityType="Self.Horario" />
+    <EntitySet Name="Horario_sala" EntityType="Self.Horario_sala" />
+    <EntitySet Name="Reserva" EntityType="Self.Reserva" />
+    <EntitySet Name="Rolex" EntityType="Self.Rolex" />
+    <EntitySet Name="Sala" EntityType="Self.Sala" />
+    <EntitySet Name="Usuario_dueno" EntityType="Self.Usuario_dueno" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <AssociationSet Name="FK__Carac_sal__Id_Ca__619B8048" Association="Self.FK__Carac_sal__Id_Ca__619B8048">
+      <End Role="Caracteristicas" EntitySet="Caracteristicas" />
+      <End Role="Carac_sala" EntitySet="Carac_sala" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Carac_sal__Id_Sa__60A75C0F" Association="Self.FK__Carac_sal__Id_Sa__60A75C0F">
+      <End Role="Sala" EntitySet="Sala" />
+      <End Role="Carac_sala" EntitySet="Carac_sala" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalle_s__Id_Sa__5FB337D6" Association="Self.FK__Detalle_s__Id_Sa__5FB337D6">
+      <End Role="Sala" EntitySet="Sala" />
+      <End Role="Detalle_sala" EntitySet="Detalle_sala" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Horario_s__Id_ho__628FA481" Association="Self.FK__Horario_s__Id_ho__628FA481">
+      <End Role="Horario" EntitySet="Horario" />
+      <End Role="Horario_sala" EntitySet="Horario_sala" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Horario_s__Id_sa__6383C8BA" Association="Self.FK__Horario_s__Id_sa__6383C8BA">
+      <End Role="Sala" EntitySet="Sala" />
+      <End Role="Horario_sala" EntitySet="Horario_sala" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reserva__Id_hora__6477ECF3" Association="Self.FK__Reserva__Id_hora__6477ECF3">
+      <End Role="Horario_sala" EntitySet="Horario_sala" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reserva__Id_usua__656C112C" Association="Self.FK__Reserva__Id_usua__656C112C">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Reserva" EntitySet="Reserva" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__Tipo_u__5CD6CB2B" Association="Self.FK__Usuarios__Tipo_u__5CD6CB2B">
+      <End Role="Rolex" EntitySet="Rolex" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sala__Id_dueno__5EBF139D" Association="Self.FK__Sala__Id_dueno__5EBF139D">
+      <End Role="Usuario_dueno" EntitySet="Usuario_dueno" />
+      <End Role="Sala" EntitySet="Sala" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario_d__Id_Us__5DCAEF64" Association="Self.FK__Usuario_d__Id_Us__5DCAEF64">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Usuario_dueno" EntitySet="Usuario_dueno" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

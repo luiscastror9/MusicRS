@@ -1,4 +1,12 @@
 ﻿body {
-
+    background: blue;
+}
+#theCarousel .carousel-control {
+    width: auto;
+    box-shadow: none;
+    font-size: 28px;
+    top: 50%;
+    left: -24px;
+    transform: translateY(-50%);
 }
 
