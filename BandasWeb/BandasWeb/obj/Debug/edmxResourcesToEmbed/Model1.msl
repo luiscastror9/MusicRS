@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelSalasStoreContainer" CdmEntityContainer="Database1Entities1">
+    <EntitySetMapping Name="Carac_sala">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Carac_sala">
+        <MappingFragment StoreEntitySet="Carac_sala">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Sala" ColumnName="Id_Sala" />
+          <ScalarProperty Name="Id_Caracteristicas" ColumnName="Id_Caracteristicas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Caracteristicas">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Caracteristicas">
+        <MappingFragment StoreEntitySet="Caracteristicas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Detalle_sala">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Detalle_sala">
+        <MappingFragment StoreEntitySet="Detalle_sala">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Sala" ColumnName="Id_Sala" />
+          <ScalarProperty Name="Max_musicos" ColumnName="Max_musicos" />
+          <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+          <ScalarProperty Name="Largo" ColumnName="Largo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Horario">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Horario">
+        <MappingFragment StoreEntitySet="Horario">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Desde" ColumnName="Desde" />
+          <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Horario_sala">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Horario_sala">
+        <MappingFragment StoreEntitySet="Horario_sala">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_horario" ColumnName="Id_horario" />
+          <ScalarProperty Name="Id_sala" ColumnName="Id_sala" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reserva">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Reserva">
+        <MappingFragment StoreEntitySet="Reserva">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_horario_sala" ColumnName="Id_horario_sala" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rolex">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Rolex">
+        <MappingFragment StoreEntitySet="Rolex">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Rolex1" ColumnName="Rolex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sala">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Sala">
+        <MappingFragment StoreEntitySet="Sala">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_dueno" ColumnName="Id_dueno" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario_dueno">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Usuario_dueno">
+        <MappingFragment StoreEntitySet="Usuario_dueno">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Usuarios" ColumnName="Id_Usuarios" />
+          <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Cantidad_salas" ColumnName="Cantidad_salas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="Database1ModelSalas.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre_usuario" ColumnName="Nombre_usuario" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Tipo_usuario" ColumnName="Tipo_usuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

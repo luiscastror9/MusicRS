@@ -11,7 +11,8 @@ namespace BandasWeb
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Data.Entity;
+
     public partial class Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -36,5 +37,10 @@ namespace BandasWeb
         public virtual Rolex Rolex { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario_dueno> Usuario_dueno { get; set; }
+
+        public static implicit operator DbSet<object>(Usuarios v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

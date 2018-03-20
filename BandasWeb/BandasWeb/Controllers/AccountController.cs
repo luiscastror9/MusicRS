@@ -152,7 +152,28 @@ namespace BandasWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                Database1Entities1 dataBase = new Database1Entities1();
+
+                Usuarios newUser = new Usuarios();
+                newUser.Email = model.Email;
+                newUser.Contrasena = model.Password;
+
+
+                dataBase.Usuarios.Add(newUser);
+
+                await dataBase.SaveChangesAsync();
+
+
+                //var d = dataBase.Usuarios.Where(x => x.Email == model.Email && x.Contrasena == model.Password).FirstOrDefault();
+
+                //if (d != null)
+                //{
+                    
+                //}
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
