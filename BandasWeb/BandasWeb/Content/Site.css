@@ -1,8 +1,57 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: #013243;
+    color: aliceblue;
+    position: relative;
 }
 
+.navbar {
+    background: #333333;
+}
+
+
+.navbar-nav > li > a {
+    color: #ededed;
+}
+
+.navbar-nav > li:hover > a {
+    background: #222;
+}
+
+.navbar > .container .navbar-brand {
+    color: #19B5FE;
+}
+
+.welcome-image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(https://www.piratestudios.co.uk/wp-content/uploads/2016/10/studio-edited-1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    max-width: 1200px;
+    height: 300px;
+    margin: 0 0 40px 0;
+    text-align: center;
+}
+
+.welcome-image h1 {
+    position: absolute;
+    font-size: 62px;
+    font-family: "Permanent Marker",cursive;
+}
+
+.welcome-image::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(1,50,67,0.6);
+    z-index: 0;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -52,7 +101,33 @@ textarea {
 .img-carousel {
     min-height: 300px;
 }
-@media (max-width: 600px) {
+
+.container.body-content {
+    padding-bottom: 60px;
+}
+
+/*footer*/
+footer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    width: 100%;
+    height: 48px;
+    z-index: 1000;
+    background: #333;
+}
+
+footer p {
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+
+    .welcome-image h1 {
+        font-size: 42px;
+    }
     .maps-location {
         display: none;
     }
