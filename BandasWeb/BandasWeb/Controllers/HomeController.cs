@@ -10,8 +10,7 @@ namespace BandasWeb.Controllers
     {
         public ActionResult Index()
         {
-            Database1Entities d = new Database1Entities();
-            d.Detalle_sala.FirstOrDefault().Sala.
+            
             return View();
         }
 

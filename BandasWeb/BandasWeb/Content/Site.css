@@ -34,6 +34,24 @@ textarea {
     margin: 0 auto;
 }
 
+#theCarousel .carousel-control {
+    width: auto;
+    box-shadow: none;
+    font-size: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#theCarousel .left.carousel-control {
+    left: -24px;
+}
+
+#theCarousel .right.carousel-control {
+    right: 6px;
+}
+.img-carousel {
+    min-height: 300px;
+}
 @media (max-width: 600px) {
     .maps-location {
         display: none;
