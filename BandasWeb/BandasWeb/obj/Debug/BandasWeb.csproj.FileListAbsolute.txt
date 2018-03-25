@@ -342,7 +342,7 @@ C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\Ban
 C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\BandasWeb\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\BandasWeb\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\BandasWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\BandasWeb\obj\Debug\BandasWeb.csprojResolveAssemblyReference.cache
 C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\BandasWeb\obj\Debug\BandasWeb.csproj.CoreCompileInputs.cache
 C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\BandasWeb\obj\Debug\BandasWeb.dll
 C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\BandasWeb\obj\Debug\BandasWeb.pdb
+C:\Users\Fede\Documents\DesarrolloWeb2018\COMIT\MusicRsOld\MusicRS\BandasWeb\BandasWeb\obj\Debug\BandasWeb.csprojResolveAssemblyReference.cache

@@ -22,7 +22,7 @@ namespace BandasWeb.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +34,9 @@ namespace BandasWeb.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +120,7 @@ namespace BandasWeb.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -140,8 +140,10 @@ namespace BandasWeb.Controllers
         public ActionResult Register()
         {
             return View();
+
         }
 
+       
         //
         // POST: /Account/Register
         [HttpPost]
@@ -158,6 +160,13 @@ namespace BandasWeb.Controllers
                 Usuarios newUser = new Usuarios();
                 newUser.Email = model.Email;
                 newUser.Contrasena = model.Password;
+                newUser.Nombre = model.Nombre;
+                newUser.Apellido = model.Apellido;
+                newUser.Nombre_usuario = model.Nombre_usuario;
+                newUser.Telefono = model.Telefono;
+                newUser.Activo = 0b1;
+                newUser.Tipo_usuario = Convert.ToInt32(model.Tipo_usuario.Where(x=>x.Selected).FirstOrDefault());                .
+                
 
 
                 dataBase.Usuarios.Add(newUser);
