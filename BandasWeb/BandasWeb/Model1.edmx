@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Database1ModelSalas.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Database1ModelSalas.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Carac_sala">
           <Key>
             <PropertyRef Name="Id" />
@@ -94,7 +94,7 @@
           <Property Name="Telefono" Type="varchar" MaxLength="20" />
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Tipo_usuario" Type="int" Nullable="false" />
-          <Property Name="Activo" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK__Carac_sal__Id_Ca__619B8048">
           <End Role="Caracteristicas" Type="Self.Caracteristicas" Multiplicity="1" />
@@ -268,8 +268,7 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Database1ModelSalas" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -379,7 +378,7 @@
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Tipo_usuario" Type="Int32" Nullable="false" />
-          <Property Name="Activo" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__Id_usua__656C112C" FromRole="Usuarios" ToRole="Reserva" />
           <NavigationProperty Name="Rolex" Relationship="Self.FK__Usuarios__Tipo_u__5CD6CB2B" FromRole="Usuarios" ToRole="Rolex" />
           <NavigationProperty Name="Usuario_dueno" Relationship="Self.FK__Usuario_d__Id_Us__5DCAEF64" FromRole="Usuarios" ToRole="Usuario_dueno" />

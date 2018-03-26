@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using BandasWeb.Models;
+using System.Security.Principal;
 
 namespace BandasWeb
 {
@@ -85,6 +86,11 @@ namespace BandasWeb
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+
+        internal Task CreateAsync(IPrincipal user, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 

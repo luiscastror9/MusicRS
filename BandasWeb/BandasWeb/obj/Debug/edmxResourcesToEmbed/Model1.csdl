@@ -106,7 +106,7 @@
     <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Tipo_usuario" Type="Int32" Nullable="false" />
-    <Property Name="Activo" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__Id_usua__656C112C" FromRole="Usuarios" ToRole="Reserva" />
     <NavigationProperty Name="Rolex" Relationship="Self.FK__Usuarios__Tipo_u__5CD6CB2B" FromRole="Usuarios" ToRole="Rolex" />
     <NavigationProperty Name="Usuario_dueno" Relationship="Self.FK__Usuario_d__Id_Us__5DCAEF64" FromRole="Usuarios" ToRole="Usuario_dueno" />

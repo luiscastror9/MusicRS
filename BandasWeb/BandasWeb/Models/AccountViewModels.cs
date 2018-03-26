@@ -86,10 +86,7 @@ namespace BandasWeb.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
-        [Required]
-        [Display(Name = "tipo")]
-        public IEnumerable<SelectListItem> Tipo_usuario { get; set; }
-
+        
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -119,7 +116,7 @@ namespace BandasWeb.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

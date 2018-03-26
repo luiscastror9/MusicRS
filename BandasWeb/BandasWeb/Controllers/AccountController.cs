@@ -1,14 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using BandasWeb.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using BandasWeb.Models;
+using System;
+using System.Linq;
+using System.Security.Principal;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace BandasWeb.Controllers
 {
@@ -153,39 +152,45 @@ namespace BandasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new Models.ApplicationUser { UserName = model.Email, Email = model.Email };
 
                 Database1Entities1 dataBase = new Database1Entities1();
 
                 Usuarios newUser = new Usuarios();
-                newUser.Email = model.Email;
-                newUser.Contrasena = model.Password;
-                newUser.Nombre = model.Nombre;
-                newUser.Apellido = model.Apellido;
-                newUser.Nombre_usuario = model.Nombre_usuario;
-                newUser.Telefono = model.Telefono;
-                newUser.Activo = 0b1;
-                newUser.Tipo_usuario = Convert.ToInt32(model.Tipo_usuario.Where(x=>x.Selected).FirstOrDefault());                .
-                
 
-
-                dataBase.Usuarios.Add(newUser);
-
-                await dataBase.SaveChangesAsync();
-
-
-                //var d = dataBase.Usuarios.Where(x => x.Email == model.Email && x.Contrasena == model.Password).FirstOrDefault();
-
-                //if (d != null)
-                //{
-                    
-                //}
-                
-                var result = await UserManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
+                if (String.IsNullOrWhiteSpace(dataBase.Usuarios.Where(m => m.Email == model.Email).FirstOrDefault().ToString()))
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    newUser.Email = model.Email;
+                    newUser.Contrasena = model.Password;
+                    newUser.Nombre = model.Nombre;
+                    newUser.Apellido = model.Apellido;
+                    newUser.Nombre_usuario = model.Nombre_usuario;
+                    newUser.Telefono = model.Telefono;
+                    newUser.Activo = true;
+                    newUser.Tipo_usuario = 2;
+                    dataBase.Usuarios.Add(newUser);
+
+                 dataBase.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("Contact", "Home");
+
+                }
+                
+
+              
+
+
+                //  var d = dataBase.Usuarios.Where(x => x.Email == model.Email && x.Contrasena == model.Password).FirstOrDefault();
+
+                //  if (d != null)
+
+
+
+                
+                   //  SignInManager.SignIn(user,isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -194,12 +199,22 @@ namespace BandasWeb.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
+                
+            //  AddErrors(CreateAsync((IPrincipal)User, (string)model.Password));
+        }
+        
+          //  If we got this far, something failed, redisplay form
+             return RedirectToAction("Index", "Home");
+    }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+        private void AddErrors(object v)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Task CreateAsync(IPrincipal user, string password)
+        {
+            throw new NotImplementedException();
         }
 
         //
