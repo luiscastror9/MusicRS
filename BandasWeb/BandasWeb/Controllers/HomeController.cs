@@ -16,7 +16,7 @@ namespace BandasWeb.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Acerca de nosotros";
 
             return View();
         }
