@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 namespace BandasWeb.Models
 {
+    
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -71,6 +72,10 @@ namespace BandasWeb.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Tipo de Usuario")]
+        public int Tipo { get; set; }
+
+        [Required]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
@@ -94,12 +99,13 @@ namespace BandasWeb.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirmar password")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
 
     }
+    
 
     public class ResetPasswordViewModel
     {

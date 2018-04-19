@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -138,6 +139,16 @@ namespace BandasWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var dictionary = new Dictionary<int, string>
+    {
+        
+        { 2, "Dueño" },
+        { 3, "Músico" }
+    };
+
+            ViewBag.tipoUsuario = new SelectList(dictionary, "Key", "Value");
+
+          
             return View();
 
         }
@@ -167,7 +178,7 @@ namespace BandasWeb.Controllers
                     newUser.Nombre_usuario = model.Nombre_usuario;
                     newUser.Telefono = model.Telefono;
                     newUser.Activo = true;
-                    newUser.Tipo_usuario = 2;
+                    newUser.Tipo_usuario = model.Tipo;
                     dataBase.Usuarios.Add(newUser);
 
                  dataBase.SaveChanges();
