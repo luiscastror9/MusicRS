@@ -151,12 +151,45 @@ namespace BandasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email };
+                Usuarios Usuario = new Usuarios();
+                Usuario_dueno Dueño = new Usuario_dueno();
+                Usuario.Nombre = model.Musicos.Nombre;
+                Usuario.Nombre_usuario = model.Musicos.Nombre_usuario;
+                Usuario.Apellido = model.Musicos.Apellido;
+                Usuario.Contrasena = model.Musicos.Contraseña;
+                Usuario.Email = model.Musicos.Email;
+                Usuario.Telefono = model.Musicos.Telefono;
+                if (model.tipo_usuario_dueño)
+                {
+                    Usuario.Tipo_usuario = 3;
+                }
+                else
+                {
+                    Usuario.Tipo_usuario = 2;
+                }
+                if (model.Musicos.Contraseña == model.Musicos.ConfirmarContraseña)
+                {
+                    Usuario.Contrasena = model.Musicos.Contraseña;
+
+
+                    Database1Entities de = new Database1Entities();
+                    de.Usuarios.Add(Usuario);
+                    if (model.tipo_usuario_dueño)
+                    {
+                        Dueño.Id_Usuarios = de.Usuarios.First().Id;
+                        Dueño.CUIT = model.Dueño.CUIT;
+                        Dueño.Direccion = model.Dueño.Direccion;
+                        de.Usuario_dueno.Add(Dueño);
+
+                    }
+                    de.SaveChanges();
+                }
+                var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
