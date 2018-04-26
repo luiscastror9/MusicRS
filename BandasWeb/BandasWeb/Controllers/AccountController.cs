@@ -152,6 +152,7 @@ namespace BandasWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email };
+
                 Usuarios Usuario = new Usuarios();
                 Usuario_dueno Dueño = new Usuario_dueno();
                 Usuario.Nombre = model.Musicos.Nombre;

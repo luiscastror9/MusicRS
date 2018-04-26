@@ -1,0 +1,35 @@
+﻿@model BandasWeb.Models.Tabla_de_salas
+@{
+    ViewBag.Title = "Tabla_de_salas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Buscador de salas</h2>
+<div class="row maps-location">
+    <!--Cambio hecho por Matias. Para que el mapa ocupe el ancho de la pantalla, puse el width en %100. Hay soluciones mejores, por favor cambiar por una solución mejor.-->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d52548.946700855675!2d-58.450568471580546!3d-34.596342826854745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1ssalas+de+ensayo+-teatro!5e0!3m2!1ses-419!2sar!4v1520290660022" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+</div>
+<table border='1'>
+
+    <tr>
+        <th>Nombre de la sala</th>
+        <th>nombre del dueño</th>
+        <th>Maximo de musicos</th>
+        <th>Ancho</th>
+        <th>Largo</th>
+        <th>Descripción</th>
+    </tr>
+    @foreach (var i in Model.lista_salas)
+    {
+    <tr>
+        <td>@i.Nombre_sala</td>
+        <td>@i.Nombre_dueno</td>
+        <td>@i.max_musicos</td>
+        <td>@i.ancho</td>
+        <td>@i.largo</td>
+        <td>@i.Descripcion</td>
+    </tr>
+      }
+    </table>
+

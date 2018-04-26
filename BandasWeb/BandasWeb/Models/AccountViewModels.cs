@@ -112,11 +112,11 @@ namespace BandasWeb.Models
     }
     public class RegisterViewModelDueño
     {
-        [Required]
+        
         [Display(Name = "CUIT")]
         public string CUIT { get; set; }
 
-        [Required]
+        
         [Display(Name = "Direccion")]
         public string Direccion { get; set; }
     }

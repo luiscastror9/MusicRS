@@ -13,7 +13,28 @@ namespace BandasWeb.Models
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
     }
-
+    public class Tabla_de_salas
+    {
+        public List<SalasloadModel> lista_salas { get; set; }
+    }
+        public class SalasloadModel
+    {
+        public string Nombre_sala { get; set; }
+        public string Nombre_dueno { get; set; }
+        public int max_musicos { get; set; }
+        public decimal ancho { get; set; }
+        public decimal largo { get; set; }
+        public string Descripcion { get; set; }
+    }
+    public class SalasSaveModel
+    {
+        public string Nombre_sala { get; set; }
+        public string Nombre_dueno { get; set; }
+        public int max_musicos { get; set; }
+        public decimal ancho { get; set; }
+        public decimal largo { get; set; }
+        public string Descripcion { get; set; }
+    }
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }
