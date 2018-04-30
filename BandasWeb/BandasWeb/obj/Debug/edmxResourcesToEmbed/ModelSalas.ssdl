@@ -65,7 +65,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Id_dueno" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Activo" Type="binary" MaxLength="1" Nullable="false" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuario_dueno">
     <Key>
@@ -89,7 +89,7 @@
     <Property Name="Telefono" Type="varchar" MaxLength="20" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Tipo_usuario" Type="int" Nullable="false" />
-    <Property Name="Activo" Type="binary" MaxLength="1" Nullable="false" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK__Carac_sal__Id_Ca__619B8048">
     <End Role="Caracteristicas" Type="Self.Caracteristicas" Multiplicity="1" />

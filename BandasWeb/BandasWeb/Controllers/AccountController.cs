@@ -152,39 +152,55 @@ namespace BandasWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email };
-
-                Usuarios Usuario = new Usuarios();
-                Usuario_dueno Dueño = new Usuario_dueno();
-                Usuario.Nombre = model.Musicos.Nombre;
-                Usuario.Nombre_usuario = model.Musicos.Nombre_usuario;
-                Usuario.Apellido = model.Musicos.Apellido;
-                Usuario.Contrasena = model.Musicos.Contraseña;
-                Usuario.Email = model.Musicos.Email;
-                Usuario.Telefono = model.Musicos.Telefono;
-                if (model.tipo_usuario_dueño)
+                using (Database1Entities de = new Database1Entities())
                 {
-                    Usuario.Tipo_usuario = 3;
-                }
-                else
-                {
-                    Usuario.Tipo_usuario = 2;
-                }
-                if (model.Musicos.Contraseña == model.Musicos.ConfirmarContraseña)
-                {
-                    Usuario.Contrasena = model.Musicos.Contraseña;
+                    using (var dbContextTransaction = de.Database.BeginTransaction())
+                    {
+                        try
+                        {
 
+                            Usuarios Usuario = new Usuarios();
+                            Usuario_dueno Dueño = new Usuario_dueno();
+                            Usuario.Nombre = model.Musicos.Nombre;
+                            Usuario.Nombre_usuario = model.Musicos.Nombre_usuario;
+                            Usuario.Apellido = model.Musicos.Apellido;
+                            Usuario.Email = model.Musicos.Email;
+                            Usuario.Telefono = model.Musicos.Telefono;
+                            if (model.tipo_usuario_dueño)
+                             {
+                            Usuario.Tipo_usuario = 3;
+                            }
+                            else
+                            {
+                             Usuario.Tipo_usuario = 2;
+                            }
 
-                    Database1Entities de = new Database1Entities();
+                            if (model.Musicos.Contraseña == model.Musicos.ConfirmarContraseña)
+                            {
+                            Usuario.Contrasena = model.Musicos.Contraseña;
+
+                             Usuario.Activo = true;
+                    
                     de.Usuarios.Add(Usuario);
+                    de.SaveChanges();
                     if (model.tipo_usuario_dueño)
                     {
-                        Dueño.Id_Usuarios = de.Usuarios.First().Id;
+                        Dueño.Id_Usuarios = de.Usuarios.Max(u => u.Id);
                         Dueño.CUIT = model.Dueño.CUIT;
                         Dueño.Direccion = model.Dueño.Direccion;
                         de.Usuario_dueno.Add(Dueño);
-
+                        de.SaveChanges();
                     }
-                    de.SaveChanges();
+                    
+                }
+                            dbContextTransaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            dbContextTransaction.Rollback();
+                            
+                        }
+                    }
                 }
                 var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
                 if (result.Succeeded)
