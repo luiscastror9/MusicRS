@@ -80,7 +80,7 @@ namespace BandasWeb.Controllers
                 {
                     if (login.Contrasena.Equals(model.Password))
                     {
-                        FormsAuthentication.SetAuthCookie(login.Nombre_usuario, false);
+                        FormsAuthentication.SetAuthCookie(login.Nombre_usuario, true);
                         return RedirectToLocal(returnUrl);
                         
                     }
@@ -95,7 +95,7 @@ namespace BandasWeb.Controllers
                     return View(model);
                 }
             }
-            ModelState.AddModelError("", "comprobando");
+            ModelState.AddModelError("", "Error general, por favor recarge la pagina");
             return View(model);
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
