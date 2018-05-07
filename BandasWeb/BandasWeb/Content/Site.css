@@ -68,14 +68,10 @@ body {
 }
 
 
-.input-group.md-form.form-sm.form-2 input {
-    border: 1px solid #19B5FE;
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-}
-
-.input-group.md-form.form-sm.form-2 input.amber-border {
-    border: 1px solid #19B5FE;
+.input-search {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .search-box input {
@@ -96,6 +92,46 @@ body {
     font-size: 18px;
     cursor: pointer;
     border-radius: 0 4px 4px 0;
+}
+
+/*Busco Salas Page*/
+
+.destacada {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.destacada img {
+    height: auto;
+    min-height: 440px;
+}
+
+.destacada h3 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.search-block {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.input-group {
+    display: flex;
+    height: 500px;
+}
+
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #19B5FE;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.input-group.md-form.form-sm.form-2 input.amber-border {
+    border: 1px solid #19B5FE;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -127,6 +163,16 @@ textarea {
     max-width: 1366px;
     border: 0;
     margin: 0 auto;
+}
+
+.maps-location.bands {
+    width: 100%;
+    height: 100%;
+}
+
+.maps-location.bands iframe {
+    height: auto;
+    min-height: 440px;
 }
 
 #theCarousel .carousel-control {
