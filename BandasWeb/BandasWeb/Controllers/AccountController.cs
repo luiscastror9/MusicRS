@@ -80,9 +80,12 @@ namespace BandasWeb.Controllers
                 {
                     if (login.Contrasena.Equals(model.Password))
                     {
-                        FormsAuthentication.SetAuthCookie(login.Nombre_usuario, true);
-                        return RedirectToLocal(returnUrl);
-                        
+                        var user = new ApplicationUser { UserName = login.Nombre_usuario, Email = login.Email };
+                        //System.Web.Security.FormsAuthentication.SetAuthCookie(login.Nombre_usuario, false);
+                         FormsAuthentication.SetAuthCookie(user.UserName, false);
+                        //FormsAuthentication.RedirectToLoginPage(user.UserName, true);
+                        return RedirectToAction("Index", "Home");
+                       // return RedirectToLocal(returnUrl);
                     }
                     else {
                         ModelState.AddModelError("", "contraseña equivocada");
@@ -182,7 +185,7 @@ namespace BandasWeb.Controllers
                     {
                         try
                         {
-
+                            
                             Usuarios Usuario = new Usuarios();
                             Usuario_dueno Dueño = new Usuario_dueno();
                             Usuario.Nombre = model.Musicos.Nombre;
@@ -218,13 +221,15 @@ namespace BandasWeb.Controllers
                     
                 }
                             dbContextTransaction.Commit();
-                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                            return RedirectToAction("Index", "Home");
+                            ModelState.Clear();
+                            ViewBag.Message = Usuario.Nombre_usuario + "fue creado exitosamente";
+                            //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            //return RedirectToAction("Index", "Home");
                         }
                         catch (Exception ex)
                         {
                             dbContextTransaction.Rollback();
-                            
+                            ViewBag.Message = ex.Message;
                         }
                     }
                 }
