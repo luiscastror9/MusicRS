@@ -81,7 +81,7 @@ namespace BandasWeb.Controllers
                     if (login.Contrasena.Equals(model.Password))
                     {
                         var user = new ApplicationUser { UserName = login.Nombre_usuario, Email = login.Email };
-                        //System.Web.Security.FormsAuthentication.SetAuthCookie(login.Nombre_usuario, false);
+                        
                          FormsAuthentication.SetAuthCookie(user.UserName, false);
                         //FormsAuthentication.RedirectToLoginPage(user.UserName, true);
                         return RedirectToAction("Index", "Home");
@@ -178,65 +178,78 @@ namespace BandasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email };
-                using (Database1Entities de = new Database1Entities())
+                var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email, PhoneNumber = model.Musicos.Telefono };
+                var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
+                if (result.Succeeded)
                 {
-                    using (var dbContextTransaction = de.Database.BeginTransaction())
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    using (Database1Entities de = new Database1Entities())
                     {
-                        try
+                        using (var dbContextTransaction = de.Database.BeginTransaction())
                         {
-                            
-                            Usuarios Usuario = new Usuarios();
-                            Usuario_dueno Dueño = new Usuario_dueno();
-                            Usuario.Nombre = model.Musicos.Nombre;
-                            Usuario.Nombre_usuario = model.Musicos.Nombre_usuario;
-                            Usuario.Apellido = model.Musicos.Apellido;
-                            Usuario.Email = model.Musicos.Email;
-                            Usuario.Telefono = model.Musicos.Telefono;
-                            if (model.tipo_usuario_dueño)
-                             {
-                            Usuario.Tipo_usuario = 3;
-                            }
-                            else
+                            try
                             {
-                             Usuario.Tipo_usuario = 2;
+                                foreach (Usuarios registro in de.Usuarios)
+                                {
+                                    if (model.Musicos.Email.Equals(registro.Email))
+                                    {
+                                        ModelState.AddModelError("", "el email ya esta registrado");
+                                        return View(model);
+                                    }
+
+                                }
+                                Usuarios Usuario = new Usuarios();
+                                Usuario_dueno Dueño = new Usuario_dueno();
+                                Usuario.Nombre = model.Musicos.Nombre;
+                                Usuario.Nombre_usuario = model.Musicos.Nombre_usuario;
+                                Usuario.Apellido = model.Musicos.Apellido;
+                                Usuario.Email = model.Musicos.Email;
+                                Usuario.Telefono = model.Musicos.Telefono;
+                                if (model.tipo_usuario_dueño)
+                                {
+                                    Usuario.Tipo_usuario = 3;
+                                }
+                                else
+                                {
+                                    Usuario.Tipo_usuario = 2;
+                                }
+
+                                if (model.Musicos.Contraseña == model.Musicos.ConfirmarContraseña)
+                                {
+                                    Usuario.Contrasena = model.Musicos.Contraseña;
+
+                                    Usuario.Activo = true;
+
+                                    de.Usuarios.Add(Usuario);
+                                    de.SaveChanges();
+                                    if (model.tipo_usuario_dueño)
+                                    {
+                                        Dueño.Id_Usuarios = de.Usuarios.Max(u => u.Id);
+                                        Dueño.CUIT = model.Dueño.CUIT;
+                                        Dueño.Direccion = model.Dueño.Direccion;
+                                        de.Usuario_dueno.Add(Dueño);
+                                        de.SaveChanges();
+                                    }
+
+                                }
+                                dbContextTransaction.Commit();
+                                //ModelState.Clear();
+                                // ViewBag.Message = Usuario.Nombre_usuario + "fue creado exitosamente";
+
+
+                                return RedirectToAction("Index", "Home");
                             }
-
-                            if (model.Musicos.Contraseña == model.Musicos.ConfirmarContraseña)
+                            catch (Exception ex)
                             {
-                            Usuario.Contrasena = model.Musicos.Contraseña;
+                                dbContextTransaction.Rollback();
+                                ViewBag.Message = ex.Message;
+                            }
+                        }
+                    }
 
-                             Usuario.Activo = true;
-                    
-                    de.Usuarios.Add(Usuario);
-                    de.SaveChanges();
-                    if (model.tipo_usuario_dueño)
-                    {
-                        Dueño.Id_Usuarios = de.Usuarios.Max(u => u.Id);
-                        Dueño.CUIT = model.Dueño.CUIT;
-                        Dueño.Direccion = model.Dueño.Direccion;
-                        de.Usuario_dueno.Add(Dueño);
-                        de.SaveChanges();
-                    }
-                    
-                }
-                            dbContextTransaction.Commit();
-                            ModelState.Clear();
-                            ViewBag.Message = Usuario.Nombre_usuario + "fue creado exitosamente";
-                            //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                            //return RedirectToAction("Index", "Home");
-                        }
-                        catch (Exception ex)
-                        {
-                            dbContextTransaction.Rollback();
-                            ViewBag.Message = ex.Message;
-                        }
-                    }
-                }
-                
-                //var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
-                //if (result.Succeeded)
-                //{
+                    //var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
+                    //if (result.Succeeded)
+                    //{
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -246,8 +259,10 @@ namespace BandasWeb.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     //return RedirectToAction("Index", "Home");
-                //}
-                //AddErrors(result);
+                    //}
+                    //AddErrors(result);
+                }
+                AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
