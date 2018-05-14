@@ -20,6 +20,17 @@ namespace BandasWeb.Controllers
         {
         }
 
+        public ActionResult Tabla_de_salas()
+        {
+            Database1Entities de = new Database1Entities();
+           
+            return     View();
+        }
+        public ActionResult Salas()
+        {
+
+            return View();
+        }
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;

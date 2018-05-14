@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BandasWeb.Models;
+using System.Web.Security;
 
 namespace BandasWeb.Controllers
 {
@@ -72,23 +73,78 @@ namespace BandasWeb.Controllers
             {
                 return View(model);
             }
+            Database1Entities de = new Database1Entities();
+            int flag_email = 0;
+            int flag_contraseña = 0;
+            foreach (Usuarios login in de.Usuarios)
+            {
+                if (login.Email.Equals(model.Email))
+                {
+                    if (login.Contrasena.Equals(model.Password))
+                    {
+                        var user = new ApplicationUser { UserName = login.Nombre_usuario, Email = login.Email };
+                        CookieController cookie = new CookieController();
+                        ActionResult resultado = cookie.Create(user);
+                        return resultado;
 
+                        //FormsAuthentication.SetAuthCookie(user.UserName, true);
+                        // HttpCookie bw_usuario = new HttpCookie("bw_usuario", user.UserName)
+                        // {
+                        //  HttpOnly = true,
+                        // Domain = "/",
+                        //  Secure = false,
+                        // Expires = DateTime.Now.AddDays(10)
+                        // };
+                        //Response.Clear();
+                        //Response.Cookies.Add(bw_usuario);
+                        //HttpContext.Request.Cookies.Add(new HttpCookie("user", user.UserName));
+
+                        //return RedirectToAction("Index", "Home");
+                        // return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        flag_contraseña++;
+
+                    }
+                }
+                else
+                {
+                    flag_email++;
+
+                }
+            }
+            if (flag_contraseña == de.Usuarios.Count())
+            {
+                ModelState.AddModelError("", "contraseña equivocada");
+                return View(model);
+            }
+            else if (flag_email == de.Usuarios.Count())
+            {
+                ModelState.AddModelError("", "email no encontrado");
+                return View(model);
+            }
+            else { 
+            ModelState.AddModelError("", "Error general, por favor recarge la pagina");
+            return View(model);
+        }
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            /*/ var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+             switch (result)
+             {
+                 case SignInStatus.Success:
+                     return RedirectToLocal(returnUrl);
+                 case SignInStatus.LockedOut:
+                     return View("Lockout");
+                 case SignInStatus.RequiresVerification:
+                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                 case SignInStatus.Failure:
+                 default:
+                     ModelState.AddModelError("", "Invalid login attempt.");
+                     return View(model);
+             } /*/
         }
 
         //
@@ -151,21 +207,92 @@ namespace BandasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                //var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email, PhoneNumber = model.Musicos.Telefono };
+         
+                //var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
+               // if (result.Succeeded)
+                //{
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    using (Database1Entities de = new Database1Entities())
+                    {
+                        using (var dbContextTransaction = de.Database.BeginTransaction())
+                        {
+                            try
+                            {
+                                foreach (Usuarios registro in de.Usuarios)
+                                {
+                                    if (model.Musicos.Email.Equals(registro.Email))
+                                    {
+                                        ModelState.AddModelError("", "el email ya esta registrado");
+                                        return View(model);
+                                    }
+
+                                }
+                                Usuarios Usuario = new Usuarios();
+                                Usuario_dueno Dueño = new Usuario_dueno();
+                                Usuario.Nombre = model.Musicos.Nombre;
+                                Usuario.Nombre_usuario = model.Musicos.Nombre_usuario;
+                                Usuario.Apellido = model.Musicos.Apellido;
+                                Usuario.Email = model.Musicos.Email;
+                                Usuario.Telefono = model.Musicos.Telefono;
+                                if (model.tipo_usuario_dueño)
+                                {
+                                    Usuario.Tipo_usuario = 3;
+                                }
+                                else
+                                {
+                                    Usuario.Tipo_usuario = 2;
+                                }
+
+                                if (model.Musicos.Contraseña == model.Musicos.ConfirmarContraseña)
+                                {
+                                    Usuario.Contrasena = model.Musicos.Contraseña;
+
+                                    Usuario.Activo = true;
+
+                                    de.Usuarios.Add(Usuario);
+                                    de.SaveChanges();
+                                    if (model.tipo_usuario_dueño)
+                                    {
+                                        Dueño.Id_Usuarios = de.Usuarios.Max(u => u.Id);
+                                        Dueño.CUIT = model.Dueño.CUIT;
+                                        Dueño.Direccion = model.Dueño.Direccion;
+                                        de.Usuario_dueno.Add(Dueño);
+                                        de.SaveChanges();
+                                    }
+
+                                }
+                                dbContextTransaction.Commit();
+                                //ModelState.Clear();
+                                // ViewBag.Message = Usuario.Nombre_usuario + "fue creado exitosamente";
+
+
+                                return RedirectToAction("Index", "Home");
+                            }
+                            catch (Exception ex)
+                            {
+                                dbContextTransaction.Rollback();
+                                ViewBag.Message = ex.Message;
+                            }
+                        }
+                    }
+
+                    //var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
+                    //if (result.Succeeded)
+                    //{
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+                    //return RedirectToAction("Index", "Home");
+                    //}
+                    //AddErrors(result);
+                //}
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form

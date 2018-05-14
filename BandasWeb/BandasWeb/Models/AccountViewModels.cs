@@ -49,13 +49,13 @@ namespace BandasWeb.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Correo electronico")]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
@@ -64,22 +64,63 @@ namespace BandasWeb.Models
 
     public class RegisterViewModel
     {
+
+        public RegisterViewModelMusico Musicos { get; set; }
+        public RegisterViewModelDueño Dueño { get; set; }
+        [Display(Name = "Soy un musico")]
+        public bool tipo_usuario_musico { get; set; }
+        [Display(Name = "Soy un dueño de sala/s")]
+        public bool tipo_usuario_dueño { get; set; }
+    }
+    public class RegisterViewModelMusico
+    {
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Apellido")]
+        public string Apellido { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre de Usuario")]
+        public string Nombre_usuario { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [Display(Name = "Contraseña")]
+        public string Contraseña { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Display(Name = "Confirmar Contraseña")]
+        [Compare("Contraseña", ErrorMessage = "La contraseñas no son iguales")]
+        public string ConfirmarContraseña { get; set; }
+
+        [Display(Name = "Telefono")]
+        public string Telefono { get; set; }
+
+        [Display(Name = "tipo_usuario")]
+        public int tipo_usuario { get; set; }
+
     }
+    public class RegisterViewModelDueño
+    {
+        
+        [Display(Name = "CUIT")]
+        public string CUIT { get; set; }
+
+        
+        [Display(Name = "Direccion")]
+        public string Direccion { get; set; }
+    }
+
 
     public class ResetPasswordViewModel
     {

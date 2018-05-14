@@ -25,7 +25,7 @@ namespace BandasWeb
         public int Id { get; set; }
         public int Id_dueno { get; set; }
         public string Nombre { get; set; }
-        public byte[] Activo { get; set; }
+        public bool Activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carac_sala> Carac_sala { get; set; }

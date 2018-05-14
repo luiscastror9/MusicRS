@@ -1,13 +1,39 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+﻿@using Microsoft.AspNet.Identity    
+@{ 
+
+    string user = "123456789"; //HttpContext.Current.Request.Cookies["user"].Value;
+    var aux = Request.Cookies["bw_usuario"];
+    if ( aux != null)
+    {
+
+        user = Request.Cookies["bw_usuario"].Value;
+    }
+    /*/var user = "123456789";
+    try
+    {
+        user = Request.Cookies["user"].Value.ToString();
+        ;
+    }catch(Exception ex)
+    {
+
+    }
+    /*/
+    }
+
+
+
+
+
+@if (user != "123456789")
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            
+             @Html.ActionLink("¡Hola " + Request.Cookies["user"].Value + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a></li>
     </ul>
