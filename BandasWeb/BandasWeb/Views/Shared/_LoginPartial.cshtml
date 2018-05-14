@@ -2,11 +2,11 @@
 @{ 
 
     string user = "123456789"; //HttpContext.Current.Request.Cookies["user"].Value;
-    var aux = Request.Cookies["user"];
+    var aux = Request.Cookies["bw_usuario"];
     if ( aux != null)
     {
 
-        user = Request.Cookies["user"].Value;
+        user = Request.Cookies["bw_usuario"].Value;
     }
     /*/var user = "123456789";
     try
@@ -32,7 +32,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.Encode(User.Identity.Name)
+            
              @Html.ActionLink("¡Hola " + Request.Cookies["user"].Value + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a></li>

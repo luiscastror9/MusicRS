@@ -83,18 +83,23 @@ namespace BandasWeb.Controllers
                     if (login.Contrasena.Equals(model.Password))
                     {
                         var user = new ApplicationUser { UserName = login.Nombre_usuario, Email = login.Email };
+                        CookieController cookie = new CookieController();
+                        ActionResult resultado = cookie.Create(user);
+                        return resultado;
 
                         //FormsAuthentication.SetAuthCookie(user.UserName, true);
-                        var cookie = new HttpCookie("user", user.UserName)
-                        {
-                            HttpOnly = true,
-                            Domain = "/",
-                            Secure = false,
-                            Expires = DateTime.Now.AddDays(1)
-                        };
-                        Request.Cookies.Add(cookie);
+                        // HttpCookie bw_usuario = new HttpCookie("bw_usuario", user.UserName)
+                        // {
+                        //  HttpOnly = true,
+                        // Domain = "/",
+                        //  Secure = false,
+                        // Expires = DateTime.Now.AddDays(10)
+                        // };
+                        //Response.Clear();
+                        //Response.Cookies.Add(bw_usuario);
                         //HttpContext.Request.Cookies.Add(new HttpCookie("user", user.UserName));
-                        return RedirectToAction("Index", "Home");
+
+                        //return RedirectToAction("Index", "Home");
                         // return RedirectToLocal(returnUrl);
                     }
                     else
@@ -123,6 +128,7 @@ namespace BandasWeb.Controllers
             ModelState.AddModelError("", "Error general, por favor recarge la pagina");
             return View(model);
         }
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             /*/ var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
