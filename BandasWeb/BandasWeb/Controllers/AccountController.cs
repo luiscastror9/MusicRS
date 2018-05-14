@@ -81,9 +81,17 @@ namespace BandasWeb.Controllers
                     if (login.Contrasena.Equals(model.Password))
                     {
                         var user = new ApplicationUser { UserName = login.Nombre_usuario, Email = login.Email };
-                        
-                         FormsAuthentication.SetAuthCookie(user.UserName, false);
-                        //FormsAuthentication.RedirectToLoginPage(user.UserName, true);
+
+                        //FormsAuthentication.SetAuthCookie(user.UserName, true);
+                        var cookie = new HttpCookie("user", user.UserName)
+                        {
+                            HttpOnly = true,
+                            Domain = "/",
+                            Secure = false,
+                            Expires = DateTime.Now.AddDays(1)
+                        };
+                        Response.Cookies.Add(cookie);
+                        //HttpContext.Request.Cookies.Add(new HttpCookie("user", user.UserName));
                         return RedirectToAction("Index", "Home");
                        // return RedirectToLocal(returnUrl);
                     }
@@ -178,11 +186,12 @@ namespace BandasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email, PhoneNumber = model.Musicos.Telefono };
-                var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                //var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email, PhoneNumber = model.Musicos.Telefono };
+         
+                //var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
+               // if (result.Succeeded)
+                //{
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     using (Database1Entities de = new Database1Entities())
                     {
                         using (var dbContextTransaction = de.Database.BeginTransaction())
@@ -261,8 +270,8 @@ namespace BandasWeb.Controllers
                     //return RedirectToAction("Index", "Home");
                     //}
                     //AddErrors(result);
-                }
-                AddErrors(result);
+                //}
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
