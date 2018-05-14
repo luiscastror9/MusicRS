@@ -74,6 +74,8 @@ namespace BandasWeb.Controllers
                 return View(model);
             }
             Database1Entities de = new Database1Entities();
+            int flag_email = 0;
+            int flag_contraseña = 0;
             foreach (Usuarios login in de.Usuarios)
             {
                 if (login.Email.Equals(model.Email))
@@ -90,24 +92,37 @@ namespace BandasWeb.Controllers
                             Secure = false,
                             Expires = DateTime.Now.AddDays(1)
                         };
-                        Response.Cookies.Add(cookie);
+                        Request.Cookies.Add(cookie);
                         //HttpContext.Request.Cookies.Add(new HttpCookie("user", user.UserName));
                         return RedirectToAction("Index", "Home");
-                       // return RedirectToLocal(returnUrl);
+                        // return RedirectToLocal(returnUrl);
                     }
-                    else {
-                        ModelState.AddModelError("", "contraseña equivocada");
-                        return View(model);
+                    else
+                    {
+                        flag_contraseña++;
+
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "email no encontrado");
-                    return View(model);
+                    flag_email++;
+
                 }
             }
+            if (flag_contraseña == de.Usuarios.Count())
+            {
+                ModelState.AddModelError("", "contraseña equivocada");
+                return View(model);
+            }
+            else if (flag_email == de.Usuarios.Count())
+            {
+                ModelState.AddModelError("", "email no encontrado");
+                return View(model);
+            }
+            else { 
             ModelState.AddModelError("", "Error general, por favor recarge la pagina");
             return View(model);
+        }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             /*/ var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);

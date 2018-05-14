@@ -6,7 +6,7 @@
     if ( aux != null)
     {
 
-        user = Request.Cookies["user"].Value.ToString();
+        user = Request.Cookies["user"].Value;
     }
     /*/var user = "123456789";
     try
@@ -33,7 +33,7 @@
     <ul class="nav navbar-nav navbar-right">
         <li>
             @Html.Encode(User.Identity.Name)
-             @Html.ActionLink("¡Hola " + Request.Cookies["user"] + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+             @Html.ActionLink("¡Hola " + Request.Cookies["user"].Value + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a></li>
     </ul>
