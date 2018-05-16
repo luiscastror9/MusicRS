@@ -207,9 +207,9 @@ namespace BandasWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email, PhoneNumber = model.Musicos.Telefono };
+                var user = new ApplicationUser { UserName = model.Musicos.Nombre_usuario, Email = model.Musicos.Email, PhoneNumber = model.Musicos.Telefono };
          
-                //var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
+                var result = await UserManager.CreateAsync(user, model.Musicos.Contraseña);
                // if (result.Succeeded)
                 //{
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
