@@ -58,7 +58,7 @@ namespace BandasWeb.Models
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "recordar sesión?")]
         public bool RememberMe { get; set; }
     }
 

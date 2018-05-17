@@ -11,6 +11,7 @@ namespace BandasWeb.Controllers
         public ActionResult Index()
         {
             //ViewData["bw_usuario"] = bw_usuario;
+
             return View();
         }
 

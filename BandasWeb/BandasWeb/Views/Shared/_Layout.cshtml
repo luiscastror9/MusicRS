@@ -1,4 +1,19 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNet.Identity
+
+@{int prueba3 = 0;
+    if (Request.IsAuthenticated) {
+        Database1Entities db = new Database1Entities();
+
+        foreach (Usuarios roles in db.Usuarios)
+        {
+            if (roles.Nombre_usuario == User.Identity.GetUserName())
+            {
+                prueba3 = roles.Tipo_usuario;
+            }
+        }
+    }
+}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,12 +21,26 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
     @Scripts.Render("~/bundles/modernizr")
  
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet"> 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script>
+        $(document).ready(function () {
+            $("#salas").hide();
+            $("#dueno").hide();
+            
+            if (prueba3 == 3) {
+                $("#dueno").show;
+            } else if (prueba3 == 2) {
+                $("#salas").show();
+            }
+            
+        });
+    </script>
 </head>
 <body>
     <div class="navbar navbar-fixed-top">
@@ -29,8 +58,8 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Nosotros", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("salas", "Tabla_de_salas", "Manage")</li>
-                    <li>@Html.ActionLink("agregar salas", "Salas", "Manage")</li>
+                    <li id="salas">@Html.ActionLink("salas", "Buscar_salas", "Usuarios")</li>
+                    <li id="dueno">@Html.ActionLink("agregar salas", "Agregar_sala", "Usuarios")</li>
                 </ul>
                @Html.Partial("_LoginPartial")
             </div>

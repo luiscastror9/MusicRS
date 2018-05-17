@@ -397,7 +397,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Musicos.cshtml" />
-    <Content Include="Views\Manage\Tabla_de_salas.cshtml" />
+    <Content Include="Views\Usuarios\Buscar_salas.cshtml" />
+    <Content Include="Views\Usuarios\Agregar_sala.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -412,7 +413,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cookie\" />
-    <Folder Include="Views\Usuarios\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,30 +1,22 @@
-﻿@using Microsoft.AspNet.Identity    
+﻿@using Microsoft.AspNet.Identity  
+  
 @{ 
-
-    string user = "123456789"; //HttpContext.Current.Request.Cookies["user"].Value;
-    var aux = Request.Cookies["bw_usuario"];
-    if ( aux != null)
+    Database1Entities de = new Database1Entities();
+    int prueba3 = 0;
+    foreach(Usuarios roles in de.Usuarios)
     {
-
-        user = Request.Cookies["bw_usuario"].Value;
+        if(roles.Nombre_usuario == User.Identity.GetUserName())
+        {
+            prueba3 = roles.Tipo_usuario;
+        }
     }
-    /*/var user = "123456789";
-    try
-    {
-        user = Request.Cookies["user"].Value.ToString();
-        ;
-    }catch(Exception ex)
-    {
-
-    }
-    /*/
     }
 
 
 
 
 
-@if (user != "123456789")
+@if (Request.IsAuthenticated)
     {
         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -33,7 +25,7 @@
     <ul class="nav navbar-nav navbar-right">
         <li>
             
-             @Html.ActionLink("¡Hola " + Request.Cookies["user"].Value + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+             @Html.ActionLink("¡Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a></li>
     </ul>

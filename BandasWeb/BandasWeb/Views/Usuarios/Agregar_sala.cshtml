@@ -1,0 +1,271 @@
+﻿@model  BandasWeb.Models.SalasSaveModel
+@{
+    ViewBag.Title = "Agregar_sala";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+   $(document).ready(function () {
+       $(".casilla2").on("change", function () {
+           $(".casilla2").not(this).attr("checked", false);
+       });
+        
+       $(".casilla3").on("change", function () {
+           $(".casilla3").not(this).attr("checked", false);
+       });
+       $(".casilla4").on("change", function () {
+           $(".casilla4").not(this).attr("checked", false);
+       });
+
+
+      
+    });
+</script>
+<h2>Agregar_sala</h2>
+
+
+@using (Html.BeginForm("Agregar_salas", "Usuarios", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Crear una nueva cuenta de usuario.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nombre_sala, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nombre_sala, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.max_musicos, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.max_musicos, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ancho, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ancho, new { @class = "form-control" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.largo, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.largo, new { @class = "form-control" })
+            </div>
+        </div>
+        <h4>horarios</h4>
+        <div class="form-group">
+            <label for="de8a10">de 8 a 10</label>
+            @Html.CheckBoxFor(m => m.de8a10, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <div class="form-group">
+            <label for="de10a12">de 10 a 12</label>
+            @Html.CheckBoxFor(m => m.de10a12, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <div class="form-group">
+            <label for="de12a14">de 12 a 14</label>
+            @Html.CheckBoxFor(m => m.de12a14, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <div class="form-group">
+            <label for="de14a16">de 14 a 16</label>
+            @Html.CheckBoxFor(m => m.de14a16, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+
+        <div class="form-group">
+            <label for="de16a18">de 16 a 18</label>
+            @Html.CheckBoxFor(m => m.de16a18, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <div class="form-group">
+            <label for="de18a20">de 18 a 20</label>
+            @Html.CheckBoxFor(m => m.de18a20, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <div class="form-group">
+            <label for="de20a22">de 20 a 22</label>
+            @Html.CheckBoxFor(m => m.de20a22, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <div class="form-group">
+            <label for="de22a24">de 22 a 24</label>
+            @Html.CheckBoxFor(m => m.de22a24, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <h4>caracteristicas</h4>
+        <h6>guitarras</h6>
+        <div class="form-group">
+            <label for="carac_guitarra_ampli_50w">amplificador de 50 watts</label>
+            @Html.CheckBoxFor(m => m.carac_guitarra_ampli_50w, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla2"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <div class="form-group">
+            <label for="carac_guitarra_ampli_100w">amplificador de 100 watts</label>
+            @Html.CheckBoxFor(m => m.carac_guitarra_ampli_100w, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla2"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <h6>bajo</h6>
+        <div class="form-group">
+            <label for="carac_bajo_ampli_100w">amplificador de 100 watts</label>
+            @Html.CheckBoxFor(m => m.carac_bajo_ampli_100w, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla3"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+
+        <div class="form-group">
+            <label for="carac_bajo_ampli_100w">amplificador de 200 watts</label>
+            @Html.CheckBoxFor(m => m.carac_bajo_ampli_200w, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla3"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        
+        <h6>bateria</h6>
+
+        <div class="form-group">
+            <label for="carac_bateria_4cuerpos">bateria simple con cuatro cuerpos</label>
+            @Html.CheckBoxFor(m => m.carac_bateria_4cuerpos, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla4"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+
+        <div class="form-group">
+            <label for="carac_bateria_5cuerpos">bateria simple con cinco cuerpos</label>
+            @Html.CheckBoxFor(m => m.carac_bateria_5cuerpos, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla4"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+        <div class="form-group">
+            <label for="carac_bateria_6cuerpos">bateria simple con seis cuerpos</label>
+            @Html.CheckBoxFor(m => m.carac_bateria_6cuerpos, new
+       {
+           //id = "tipo_usuario_musico",
+           @class = "casilla4"//,
+                             //value = 2,
+                             //data_mini = "true"
+       })
+
+
+        </div>
+
+        <h6>micelaneos</h6><div class="form-group">
+    <label for="carac_parlantes">parlantes extra en la sala</label>
+    @Html.CheckBoxFor(m => m.carac_parlantes, new
+{
+    //id = "tipo_usuario_musico",
+    @class = "casilla"//,
+                      //value = 2,
+                      //data_mini = "true"
+})
+
+
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-default" value="agregar sala" />
+    </div>
+</div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
